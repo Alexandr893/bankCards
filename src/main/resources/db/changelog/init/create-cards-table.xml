@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2" author="developer">
+        <preConditions onFail="CONTINUE">
+            <not>
+                <tableExists tableName="cards"/>
+            </not>
+        </preConditions>
+        <createTable tableName="cards">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="encrypted_card_number" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cardholder_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expiry_date" type="date"/>
+            <column name="status" type="varchar(50)"/>
+            <column name="balance" type="decimal(19,2)"/>
+            <column name="owner_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="cards"
+                baseColumnNames="owner_id"
+                referencedTableName="users"
+                referencedColumnNames="id"
+                constraintName="fk_cards_users"/>
+    </changeSet>
+</databaseChangeLog>
