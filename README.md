@@ -14,7 +14,7 @@
 
 1. Клонируйте репозиторий с **GitHub** с помощью команды:
    git clone https://github.com/Alexandr893/bankCards.git
-    cd bankCards**
+    cd bankCards
    
 2. Запуск **Maven**:
     mvn clean install
